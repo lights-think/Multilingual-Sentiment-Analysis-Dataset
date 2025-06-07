@@ -1,7 +1,7 @@
 # A High-Quality Multilingual Sentiment Analysis Dataset (EN/ZH)
 # 一个高质量的中英双语情感分析数据集
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https.img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A high-quality, re-labeled 3-class sentiment analysis dataset containing 100k Chinese (from Weibo) and 100k English (from SST-2, IMDB, Yelp, Amazon) samples. This dataset was created to provide a balanced and more reliable resource for multilingual and cross-lingual sentiment analysis tasks.
 
@@ -21,9 +21,11 @@ The dataset is divided into two main files: one for English and one for Chinese.
 
 数据集被分为两个文件：一个英文数据集，一个中文数据集。
 
-### English Dataset (`English_Sentiment_3-Class_Dataset.csv`)
+### English Dataset (`English_Sentiment_3-Class_Dataset.zip`)
+* **Note:** This file is in `.zip` format due to its large size. The code example below shows how to load it directly.
+* **注意：** 由于文件较大，此数据集为 `.zip` 压缩格式。下面的代码示例展示了如何直接加载它。
 * **Source:** A combination and re-labeling of several famous datasets:
-    * [SST-2](https://nlp.stanford.edu/sentiment/index.html) (Stanford Sentiment Treebank)
+    * [SST-2](https.nlp.stanford.edu/sentiment/index.html) (Stanford Sentiment Treebank)
     * [IMDB Reviews](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews)
     * [Yelp Reviews](https://www.yelp.com/dataset)
     * [Amazon Review Polarity](https://www.kaggle.com/datasets/bittlingmayer/amazonreviews)
@@ -41,10 +43,10 @@ Both CSV files share the same simple structure, with two columns: `data` and `la
 
 两个CSV文件都遵循相同的结构，包含两列：`data` 和 `label`。
 
-| Column | Description |
-| :--- | :--- |
+| Column | Description                                    |
+| :----- | :--------------------------------------------- |
 | `data` | The text content of the review/post. (文本内容) |
-| `label` | The sentiment label. (情感标签) |
+| `label`  | The sentiment label. (情感标签)                 |
 
 ### Label Description | 标签说明
 The sentiment is categorized into three classes:
@@ -58,19 +60,22 @@ The sentiment is categorized into three classes:
 
 ## 🚀 Getting Started | 如何使用
 
-Here's a simple example of how to load and use the dataset with Python's `pandas` library.
+Here's a simple example of how to load and use the dataset with Python's `pandas` library. The code can directly read the English data from the `.zip` file without manual extraction.
 
-下面是一个使用 Python `pandas` 库加载和查看数据的简单示例。
+下面是一个使用 Python `pandas` 库加载和查看数据的简单示例。该代码**无需手动解压**，即可直接从 `.zip` 文件中读取英文数据。
 
 ```python
 import pandas as pd
 
 # Define filenames
-english_dataset_path = 'English_Sentiment_3-Class_Dataset.csv'
+# Note: The English dataset is a zip archive.
+english_dataset_path = 'English_Sentiment_3-Class_Dataset.zip'
 chinese_dataset_path = 'Chinese_Sentiment_3-Class_Dataset.csv'
 
 # Load the datasets
 try:
+    # Pandas can read directly from a zip file.
+    # We assume the csv file inside the zip is named 'English_Sentiment_3-Class_Dataset.csv'
     df_en = pd.read_csv(english_dataset_path)
     df_zh = pd.read_csv(chinese_dataset_path)
 
@@ -88,8 +93,12 @@ try:
 
 except FileNotFoundError as e:
     print(f"Error: {e}")
-    print("Please make sure the CSV files are in the correct directory and named correctly.")
-    print("请确保CSV文件位于正确的目录下且文件名无误。")
+    print("Please make sure the dataset files are in the correct directory and named correctly.")
+    print("请确保数据集文件位于正确的目录下且文件名无误。")
+except Exception as e:
+    print(f"An error occurred: {e}")
+    print("If you have trouble loading the zip file, ensure it contains one CSV file or specify the filename inside the archive.")
+    print("如果加载zip文件时出错，请确保压缩包内只包含一个CSV文件，或在代码中指定内部的文件名。")
 
 ```
 
